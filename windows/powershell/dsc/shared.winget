@@ -1,0 +1,126 @@
+properties:
+  resources:
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installGit
+      directives:
+        description: Install Git
+      settings:
+        Id: Microsoft.Git
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installWindowsTerminal
+      directives:
+        description: Install Windows Terminal
+      settings:
+        Id: Microsoft.WindowsTerminal
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installVSCode
+      directives:
+        description: Install Visual Studio Code
+      settings:
+        Id: Microsoft.VisualStudioCode
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installDockerDesktop
+      directives:
+        description: Install Docker Desktop
+      settings:
+        Id: Docker.DockerDesktop
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installNeovim
+      directives:
+        description: Install Neovim
+      settings:
+        Id: Neovim.Neovim
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installRipgrep
+      directives:
+        description: Install Ripgrep
+      settings:
+        Id: BurntSushi.ripgrep.MSVC
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installFd
+      directives:
+        description: Install fd
+      settings:
+        Id: sharkdp.fd
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: install7zip
+      directives:
+        description: Install 7-Zip
+      settings:
+        Id: 7zip.7zip
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installNodeJS
+      directives:
+        description: Install Node.js LTS
+      settings:
+        Id: OpenJS.NodeJS.LTS
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installZig
+      directives:
+        description: Install Zig
+      settings:
+        Id: zig.zig
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installPython
+      directives:
+        description: Install Python 3.13
+      settings:
+        Id: Python.Python.3.13
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installOhMyPosh
+      directives:
+        description: Install Oh My Posh
+      settings:
+        Id: JanDeDobbeleer.OhMyPosh
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installDebian
+      directives:
+        description: Install Debian
+      settings:
+        Id: Debian.Debian
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installPowerToys
+      directives:
+        description: Install PowerToys
+        allowPreRelease: true
+      settings:
+        Id: Microsoft.PowerToys
+        Source: winget
+
+    - resource: Microsoft.PowerToys.Configure/PowerToysConfigure
+      dependsOn:
+        - installPowerToys
+      directives:
+        description: Configure PowerToys settings
+      settings:
+        PowerLauncher:
+          Enabled: true
+          OpenPowerLauncher: "Win+Space"
+
+  configurationVersion: 0.2.0

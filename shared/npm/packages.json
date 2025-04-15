@@ -1,0 +1,8 @@
+{
+  "global": [
+    {
+      "name": "@vscode/vsce",
+      "version": "latest"
+    }
+  ]
+}

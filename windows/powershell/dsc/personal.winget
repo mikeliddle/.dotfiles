@@ -1,0 +1,74 @@
+properties:
+  resources:
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installNextcloud
+      directives:
+        description: Install Nextcloud
+      settings:
+        Id: Nextcloud.NextcloudDesktop
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installSteam
+      directives:
+        description: Install Steam
+      settings:
+        Id: Valve.Steam
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installEpicGamesLauncher
+      directives:
+        description: Install Epic Games Launcher
+      settings:
+        Id: EpicGames.EpicGamesLauncher
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installGitHubCLI
+      directives:
+        description: Install GitHub CLI
+      settings:
+        Id: GitHub.cli
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installGIMP
+      directives:
+        description: Install GIMP 3
+      settings:
+        Id: GIMP.GIMP.3
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installPlex
+      directives:
+        description: Install Plex
+      settings:
+        Id: Plex.Plex
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installVisualStudio
+      directives:
+        description: Install Visual Studio Professional 2022
+        allowPreRelease: true
+      settings:
+        Id: Microsoft.VisualStudio.2022.Professional
+        Source: winget
+
+    - resource: Microsoft.VisualStudio.DSC/VSComponents
+      dependsOn:
+        - installVisualStudio
+      directives:
+        description: Configure Visual Studio settings
+      settings:
+        productId: Microsoft.VisualStudio.Product.Professional
+        channelId: VisualStudio.17.Release
+        components:
+          - Microsoft.VisualStudio.Workload.ASPNETWebDevelopment
+          - Microsoft.VisualStudio.Workload.DesktopDevelopmentWithCPP
+          - Microsoft.VisualStudio.Component.VC.Tools.x86.x64
+          - Microsoft.VisualStudio.Component.Windows10SDK
+
+  configurationVersion: 0.2.0

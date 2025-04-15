@@ -1,0 +1,74 @@
+{
+  "editor.inlineSuggest.enabled": true,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "go.toolsManagement.autoUpdate": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+  "git.openRepositoryInParentFolders": "always",
+  "powershell.promptToUpdatePowerShell": false,
+  "redhat.telemetry.enabled": false,
+  "git.autofetch": true,
+  "git.ignoreRebaseWarning": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "cmake.configureOnOpen": false,
+  "[c]": {
+    "editor.wordBasedSuggestions": "off",
+    "editor.suggest.insertMode": "replace",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "explorer.confirmPasteNative": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "LiddleLab",
+  "git.blame.editorDecoration.enabled": true,
+  "STM32VSCodeExtension.cubeCLT.path": "c:\\ST\\STM32CubeCLT_1.18.0",
+  "STM32VSCodeExtension.projectCreator.executablePath": "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeMX",
+  "workbench.iconTheme": "helium-icon-theme",
+  "editor.tabSize": 4,
+  "files.trimTrailingWhitespace": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.fixAll": "always"
+  },
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true
+  },
+  "terminal.integrated.hideOnStartup": "always",
+  "workbench.panel.opensMaximized": "never",
+  "workbench.sideBar.location": "left",
+  "chat.agent.enabled": true,
+  "terminal.integrated.fontFamily": "JetBrainsMonoNL NFM",
+  "editor.fontFamily": "JetBrainsMonoNL NFM"
+}

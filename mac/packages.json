@@ -1,0 +1,10 @@
+{
+  "personal": [
+    { "name": "neovim", "package": "neovim" },
+    { "name": "curl", "package": "curl" },
+    { "name": "docker", "package": "--cask docker" },
+    { "name": "dotnet", "package": "dotnet" },
+    { "name": "nextcloud", "package": "nextcloud" },
+    { "name": "node", "package": "node" }
+  ]
+}

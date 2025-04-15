@@ -1,0 +1,73 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#011736",
+          "foreground": "#44ff00",
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "background": "#8AC240",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF9248{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#8AC240{{ end }}",
+            "{{ if gt .Ahead 0 }}#2AA198{{ end }}",
+            "{{ if gt .Behind 0 }}#DC322F{{ end }}"
+          ],
+          "foreground": "#011627",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "branch_icon": "\ue725 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "powerline",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} ",
+          "type": "git"
+        },
+        {
+          "background": "#40c4ff",
+          "foreground": "#ffffff",
+          "properties": {
+            "time_format": "_2,15:04"
+          },
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " \uf073 {{ .CurrentDate | date .Format }} ",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#21c7c7",
+          "style": "plain",
+          "template": "\u2570\u2500",
+          "type": "text"
+        },
+        {
+          "foreground": "#e0f8ff",
+          "foreground_templates": ["{{ if gt .Code 0 }}#ef5350{{ end }}"],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": "\ue285 ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "version": 3
+}
