@@ -24,6 +24,6 @@ if (-not (Test-Path -Path "~\.config")) {
     New-Item -Path "~\.config" -ItemType Directory -Force | Out-Null
 }
 
-Copy-Item -Recurse -Force windows/config/miliddle.omp.json ~/.config/
+Copy-Item -Force shared/config/miliddle.omp.json ~/.config/
 Copy-Item -Force windows/config/wt.json "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Write-Output "Windows Terminal settings updated."
