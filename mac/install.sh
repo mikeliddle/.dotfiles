@@ -95,7 +95,7 @@ cp -r shared/.vscode/* "$VSCODE_CONFIG_PATH" || echo "Failed to copy VSCode conf
 VSCODE_EXT_JSON="shared/.vscode/extensions.json"
 if [[ -f "$VSCODE_EXT_JSON" ]]; then
     echo "Installing VSCode extensions from $VSCODE_EXT_JSON..."
-    EXTENSIONS=$(jq -r '.[]' "$VSCODE_EXT_JSON")
+    EXTENSIONS=$(jq -r '.recommendations[]' "$VSCODE_EXT_JSON")
     for extension in $EXTENSIONS; do
         if ! code --list-extensions | grep -q "^$extension$"; then
             code --install-extension "$extension" || echo "Failed to install VSCode extension: $extension"
@@ -111,3 +111,4 @@ fi
 git config --global push.autoSetupRemote true
 
 echo "macOS setup complete!"
+brew update && brew upgrade &
