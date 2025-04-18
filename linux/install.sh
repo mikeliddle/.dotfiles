@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PACKAGE_FILE="./linux/packages.json"
-NVIM_CONFIG_PATH="$HOME/.nvim"
+NVIM_CONFIG_PATH="$HOME/.config/nvim"
 
 # Function to check if a command exists
 function command_exists() {
@@ -21,7 +21,7 @@ function install_package() {
 
 # Ensure jq is installed
 if ! command_exists "jq"; then
-    echo "Error: jq is required but not installed. Please install jq and re-run the script."
+    sudo apt-get install -y jq || { echo "Failed to install jq. Exiting."; exit 1; }
     exit 1
 fi
 
@@ -40,19 +40,8 @@ fi
 BASHRC_SOURCE="./linux/bash/.bashrc"
 BASH_ALIASES_SOURCE="./linux/bash/.bash_aliases"
 
-if [[ -f "$BASHRC_SOURCE" ]]; then
-    cp "$BASHRC_SOURCE" "$HOME/.bashrc"
-    echo "Installed .bashrc to $HOME"
-else
-    echo "Error: $BASHRC_SOURCE not found. Skipping .bashrc installation."
-fi
-
-if [[ -f "$BASH_ALIASES_SOURCE" ]]; then
-    cp "$BASH_ALIASES_SOURCE" "$HOME/.bash_aliases"
-    echo "Installed .bash_aliases to $HOME"
-else
-    echo "Error: $BASH_ALIASES_SOURCE not found. Skipping .bash_aliases installation."
-fi
+cp "$BASHRC_SOURCE" "$HOME/.bashrc"
+cp "$BASH_ALIASES_SOURCE" "$HOME/.bash_aliases"
 
 # Set up Neovim configuration
 if [[ ! -d "$NVIM_CONFIG_PATH" ]]; then
@@ -75,6 +64,25 @@ if [[ -f "$VSCODE_SETTINGS_SOURCE" ]]; then
     echo "Installed VSCode settings to $VSCODE_CONFIG_PATH"
 else
     echo "Error: $VSCODE_SETTINGS_SOURCE not found. Skipping VSCode settings installation."
+fi
+
+# Install VSCode extensions from a list
+VSCODE_EXTENSIONS_FILE="./shared/vscode/extensions.txt"
+
+# Install VSCode extensions from shared/.vscode/extensions.json if it exists
+VSCODE_EXT_JSON="shared/.vscode/extensions.json"
+if [[ -f "$VSCODE_EXT_JSON" ]]; then
+    echo "Installing VSCode extensions from $VSCODE_EXT_JSON..."
+    EXTENSIONS=$(jq -r '.[]' "$VSCODE_EXT_JSON")
+    for extension in $EXTENSIONS; do
+        if ! code --list-extensions | grep -q "^$extension$"; then
+            code --install-extension "$extension" || echo "Failed to install VSCode extension: $extension"
+        else
+            echo "VSCode extension $extension is already installed."
+        fi
+    done
+else
+    echo "VSCode extensions file $VSCODE_EXT_JSON not found. Skipping VSCode extension installation."
 fi
 
 git config --global push.autoSetupRemote true

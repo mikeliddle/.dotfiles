@@ -91,6 +91,23 @@ if [[ ! -d "$VSCODE_CONFIG_PATH" ]]; then
 fi
 cp -r shared/.vscode/* "$VSCODE_CONFIG_PATH" || echo "Failed to copy VSCode configuration files"
 
+# Install VSCode extensions from shared/.vscode/extensions.json if it exists
+VSCODE_EXT_JSON="shared/.vscode/extensions.json"
+if [[ -f "$VSCODE_EXT_JSON" ]]; then
+    echo "Installing VSCode extensions from $VSCODE_EXT_JSON..."
+    EXTENSIONS=$(jq -r '.[]' "$VSCODE_EXT_JSON")
+    for extension in $EXTENSIONS; do
+        if ! code --list-extensions | grep -q "^$extension$"; then
+            code --install-extension "$extension" || echo "Failed to install VSCode extension: $extension"
+        else
+            echo "VSCode extension $extension is already installed."
+        fi
+    done
+else
+    echo "VSCode extensions file $VSCODE_EXT_JSON not found. Skipping VSCode extension installation."
+fi
+
+
 git config --global push.autoSetupRemote true
 
 echo "macOS setup complete!"
