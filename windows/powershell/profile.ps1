@@ -1,5 +1,7 @@
-Import-Module -Name posh-git
+# Import-Module -Name posh-git
 # oh-my-posh init pwsh --config ~/.config/miliddle.omp.json | Invoke-Expression
+
+### FUNCTIONS
 function Invoke-SetDevLocation {
     param (
         [string]$SubPath = ""
@@ -35,6 +37,7 @@ function Invoke-OpenDevProject {
     code $FullPath
 }
 
+### ALIASES
 Set-Alias -Name vi -value nvim
 Set-Alias -Name vim -value nvim
 Set-Alias -Name dev -value Invoke-SetDevLocation

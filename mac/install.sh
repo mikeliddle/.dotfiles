@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# Function to install a package
+function install_package() {
+    local package_name="$1"
+    if ! brew list "$package_name" &> /dev/null; then
+        echo "Installing $package_name..."
+        brew install $package_name || echo "Failed to install $package_name"
+    else
+        echo "$package_name is already installed."
+    fi
+}
+
+function install_cask() {
+    local cask_name="$1"
+    if ! brew list --cask "$cask_name" &> /dev/null; then
+        echo "Installing $cask_name..."
+        brew install --cask $cask_name || echo "Failed to install $cask_name"
+    else
+        echo "$cask_name is already installed."
+    fi
+}
+
 PACKAGE_FILE="./mac/packages.json"
 
 # Install Xcode Command Line Tools
@@ -24,40 +45,6 @@ if ! command -v jq &> /dev/null; then
     brew install jq || { echo "Failed to install jq. Exiting."; exit 1; }
 fi
 
-# Function to install a package
-function install_package() {
-    local package_name=$1
-    if ! brew list "$package_name" &> /dev/null; then
-        echo "Installing $package_name..."
-        brew install "$package_name" || echo "Failed to install $package_name"
-    else
-        echo "$package_name is already installed."
-    fi
-}
-
-# Set up Neovim configuration
-NVIM_CONFIG_PATH="$HOME/.nvim"
-if [[ ! -d "$NVIM_CONFIG_PATH" ]]; then
-    mkdir -p "$NVIM_CONFIG_PATH"
-    echo "Created Neovim configuration directory at $NVIM_CONFIG_PATH"
-fi
-cp -r shared/nvim/* "$NVIM_CONFIG_PATH" || echo "Failed to copy Neovim configuration files"
-
-# Set up VSCode configuration
-VSCODE_CONFIG_PATH="$HOME/Library/Application Support/Code/User"
-if [[ ! -d "$VSCODE_CONFIG_PATH" ]]; then
-    mkdir -p "$VSCODE_CONFIG_PATH"
-    echo "Created VSCode configuration directory at $VSCODE_CONFIG_PATH"
-fi
-cp -r shared/.vscode/* "$VSCODE_CONFIG_PATH" || echo "Failed to copy VSCode configuration files"
-
-git config --global push.autoSetupRemote true
-
-# Create .zshrc and copy Zsh-related files
-echo "Setting up Zsh configuration..."
-mkdir -p ~/.zsh
-cp -r mac/zsh/* ~/.zsh/
-
 # Install required packages from the package file
 if [[ -f "$PACKAGE_FILE" ]]; then
     PACKAGES=$(jq -r '.personal[].package' "$PACKAGE_FILE")
@@ -68,4 +55,60 @@ else
     echo "Package file $PACKAGE_FILE not found. Skipping package installation."
 fi
 
+# Install required casks from the package file
+if [[ -f "$PACKAGE_FILE" ]]; then
+    CASKS=$(jq -r '.personal[].cask' "$PACKAGE_FILE")
+    for cask in $CASKS; do
+        install_cask "$cask"
+    done
+else
+    echo "Package file $PACKAGE_FILE not found. Skipping cask installation."
+fi
+
+# Set up Neovim configuration
+NVIM_CONFIG_PATH="$HOME/.config/nvim"
+if [[ ! -d "$NVIM_CONFIG_PATH" ]]; then
+    mkdir -p "$NVIM_CONFIG_PATH"
+    echo "Created Neovim configuration directory at $NVIM_CONFIG_PATH"
+fi
+cp -r shared/nvim/* "$NVIM_CONFIG_PATH" || echo "Failed to copy Neovim configuration files"
+
+# Create .zshrc and copy Zsh-related files
+echo "Setting up Zsh configuration..."
+mkdir -p ~/.zsh
+cp -r mac/zsh/* ~/.zsh/
+cp mac/.zshrc ~/.zshrc
+cp shared/config/* ~/.config/
+
+oh-my-posh font install "JetBrainsMono"
+cp -r shared/config/* ~/.config/
+
+# Set up VSCode configuration
+VSCODE_CONFIG_PATH="$HOME/Library/Application Support/Code/User"
+if [[ ! -d "$VSCODE_CONFIG_PATH" ]]; then
+    mkdir -p "$VSCODE_CONFIG_PATH"
+    echo "Created VSCode configuration directory at $VSCODE_CONFIG_PATH"
+fi
+cp -r shared/.vscode/* "$VSCODE_CONFIG_PATH" || echo "Failed to copy VSCode configuration files"
+
+# Install VSCode extensions from shared/.vscode/extensions.json if it exists
+VSCODE_EXT_JSON="shared/.vscode/extensions.json"
+if [[ -f "$VSCODE_EXT_JSON" ]]; then
+    echo "Installing VSCode extensions from $VSCODE_EXT_JSON..."
+    EXTENSIONS=$(jq -r '.recommendations[]' "$VSCODE_EXT_JSON")
+    for extension in $EXTENSIONS; do
+        if ! code --list-extensions | grep -q "^$extension$"; then
+            code --install-extension "$extension" || echo "Failed to install VSCode extension: $extension"
+        else
+            echo "VSCode extension $extension is already installed."
+        fi
+    done
+else
+    echo "VSCode extensions file $VSCODE_EXT_JSON not found. Skipping VSCode extension installation."
+fi
+
+
+git config --global push.autoSetupRemote true
+
 echo "macOS setup complete!"
+brew update && brew upgrade &

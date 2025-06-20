@@ -1,10 +1,17 @@
 {
   "personal": [
-    { "name": "neovim", "package": "neovim" },
-    { "name": "curl", "package": "curl" },
-    { "name": "docker", "package": "--cask docker" },
-    { "name": "dotnet", "package": "dotnet" },
-    { "name": "nextcloud", "package": "nextcloud" },
-    { "name": "node", "package": "node" }
+    { "name": "neovim",     "package": "neovim",    "cask": "" },
+    { "name": "curl",       "package": "curl",      "cask": "" },
+    { "name": "git",        "package": "git",       "cask": "" },
+    { "name": "tmux",       "package": "tmux",      "cask": "" },
+    { "name": "docker",     "package": "",          "cask": "docker" },
+    { "name": "dotnet",     "package": "dotnet",    "cask": "" },
+    { "name": "nextcloud",  "package": "nextcloud", "cask": "" },
+    { "name": "node",       "package": "node",      "cask": "" },
+    { "name": "fd",         "package": "fd",        "cask": "" },
+    { "name": "rg",         "package": "ripgrep",   "cask": "" },
+    { "name": "code",       "package": "",          "cask": "visual-studio-code" },
+    { "name": "ghostty",    "package": "ghostty",   "cask": "" },
+    { "name": "omp",        "package": "jandedobbeleer/oh-my-posh/oh-my-posh", "cask": "" }
   ]
 }
