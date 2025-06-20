@@ -1,4 +1,4 @@
-# Import-Module -Name posh-git
+Import-Module -Name posh-git
 # oh-my-posh init pwsh --config ~/.config/miliddle.omp.json | Invoke-Expression
 
 ### FUNCTIONS
