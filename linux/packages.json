@@ -1,16 +1,12 @@
 {
   "personal": [
-    { "name": "git",        "package": "git" },
-    { "name": "neovim",     "package": "neovim" },
-    { "name": "tmux",       "package": "tmux" },
-    { "name": "curl",       "package": "curl" },
-    { "name": "docker",     "package": "docker" },
-    { "name": "dotnet",     "package": "dotnet" },
-    { "name": "vscode",     "package": "vscode" },
-    { "name": "nextcloud",  "package": "nextcloud" },
-    { "name": "node",       "package": "node" },
-    { "name": "fd",         "package": "fd" },
-    { "name": "rg",         "package": "ripgrep" },
-    { "name": "jq",         "package": "jq" }
+    { "name": "git", "package": "git" },
+    { "name": "tmux", "package": "tmux" },
+    { "name": "curl", "package": "curl" },
+    { "name": "nodejs", "package": "nodejs" },
+    { "name": "npm", "package": "npm" },
+    { "name": "fd", "package": "fd-find" },
+    { "name": "rg", "package": "ripgrep" },
+    { "name": "jq", "package": "jq" }
   ]
 }
