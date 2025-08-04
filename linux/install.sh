@@ -125,6 +125,85 @@ install_neovim() {
 
 install_neovim
 
+# Install latest Zig
+install_zig() {
+    if command_exists "zig"; then
+        local current_version=$(zig version 2>/dev/null || echo "unknown")
+        echo "Zig $current_version is already installed."
+        return 0
+    fi
+
+    echo "Installing Zig..."
+
+    # Create local bin directory if it doesn't exist
+    mkdir -p "$HOME/.local/bin"
+
+    # Try to get the actual download URL from ziglang.org/download
+    echo "Fetching Zig download information..."
+    local download_page=$(curl -s https://ziglang.org/download/)
+
+    # Look for the master build URL (most stable nightly)
+    local zig_url=$(echo "$download_page" | grep -o 'https://[^"]*zig-linux-x86_64[^"]*\.tar\.xz' | head -1)
+
+    if [ -z "$zig_url" ]; then
+        echo "Could not find Zig download URL, trying fallback method..."
+        # Fallback: try a known working URL pattern
+        zig_url="https://ziglang.org/builds/zig-linux-x86_64-0.13.0.tar.xz"
+    fi
+
+    echo "Downloading Zig from: $zig_url"
+    local temp_file="/tmp/zig-linux-x86_64.tar.xz"
+
+    if ! curl -L "$zig_url" -o "$temp_file"; then
+        echo "Failed to download Zig"
+        return 1
+    fi
+
+    # Verify the file was downloaded correctly
+    if [ ! -f "$temp_file" ] || [ ! -s "$temp_file" ]; then
+        echo "Downloaded file is empty or missing"
+        return 1
+    fi
+
+    # Extract to temporary directory
+    local temp_dir="/tmp/zig-extract"
+    rm -rf "$temp_dir"
+    mkdir -p "$temp_dir"
+
+    echo "Extracting Zig..."
+    if ! tar -xf "$temp_file" -C "$temp_dir" --strip-components=1; then
+        echo "Failed to extract Zig archive"
+        return 1
+    fi
+
+    # Move to final location
+    local zig_dir="$HOME/.local/zig"
+    rm -rf "$zig_dir"
+    mv "$temp_dir" "$zig_dir"
+
+    # Create symlink
+    ln -sf "$zig_dir/zig" "$HOME/.local/bin/zig"
+
+    # Add ~/.local/bin to PATH if not already there
+    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+        echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+        export PATH="$HOME/.local/bin:$PATH"
+    fi
+
+    # Clean up
+    rm -f "$temp_file"
+    rm -rf "$temp_dir"
+
+    echo "Zig installed successfully at $HOME/.local/zig"
+    if command_exists "zig"; then
+        echo "Zig version: $(zig version)"
+    else
+        echo "Zig installed, you may need to run: source ~/.bashrc"
+    fi
+}
+
+install_zig
+
 # Install Visual Studio Code
 install_vscode() {
     if command_exists "code" && package_installed "code"; then
