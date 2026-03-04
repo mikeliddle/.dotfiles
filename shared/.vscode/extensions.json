@@ -3,7 +3,6 @@
     "dan-c-underwood.arm",
     "davidanson.vscode-markdownlint",
     "esbenp.prettier-vscode",
-    "github.copilot",
     "github.copilot-chat",
     "github.vscode-pull-request-github",
     "helgardrichard.helium-icon-theme",
@@ -13,10 +12,9 @@
     "mcu-debug.memory-view",
     "mcu-debug.peripheral-viewer",
     "mcu-debug.rtos-views",
-    "mcu-debug.rtos-views",
     "mikeliddle.liddlelab-theme",
     "ms-azuretools.vscode-bicep",
-    "ms-azuretools.vscode-docker",
+    "ms-azuretools.vscode-containers",
     "ms-edgedevtools.vscode-edge-devtools",
     "ms-python.debugpy",
     "ms-python.isort",
@@ -40,8 +38,6 @@
     "redhat.vscode-yaml",
     "tomoki1207.pdf",
     "trond-snekvik.gnu-mapfiles",
-    "visualstudioexptteam.intellicode-api-usage-examples",
-    "visualstudioexptteam.vscodeintellicode",
     "xaver.clang-format",
     "zixuanwang.linkerscript"
   ]
