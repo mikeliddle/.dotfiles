@@ -105,6 +105,14 @@ properties:
         Source: winget
 
     - resource: Microsoft.Winget.DSC/WinGetPackage
+      id: installGitHubCopilot
+      directives:
+        description: Install GitHub Copilot CLI
+      settings:
+        Id: Github.Copilot
+        Source: winget
+
+    - resource: Microsoft.Winget.DSC/WinGetPackage
       id: installPowerToys
       directives:
         description: Install PowerToys
