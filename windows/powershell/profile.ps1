@@ -1,5 +1,4 @@
 Import-Module -Name posh-git
-# oh-my-posh init pwsh --config ~/.config/miliddle.omp.json | Invoke-Expression
 
 ### FUNCTIONS
 function Invoke-SetDevLocation {

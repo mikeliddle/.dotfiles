@@ -12,4 +12,4 @@ export LANG=en_US.UTF-8
 
 source ~/.zsh/aliases
 
-eval "$(oh-my-posh init zsh --config ~/.config/miliddle.omp.json)"
+

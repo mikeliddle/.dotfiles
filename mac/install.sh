@@ -78,10 +78,6 @@ echo "Setting up Zsh configuration..."
 mkdir -p ~/.zsh
 cp -r mac/zsh/* ~/.zsh/
 cp mac/.zshrc ~/.zshrc
-cp shared/config/* ~/.config/
-
-oh-my-posh font install "JetBrainsMono"
-cp -r shared/config/* ~/.config/
 
 # Set up VSCode configuration
 VSCODE_CONFIG_PATH="$HOME/Library/Application Support/Code/User"

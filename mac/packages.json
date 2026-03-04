@@ -12,6 +12,6 @@
     { "name": "rg",         "package": "ripgrep",   "cask": "" },
     { "name": "code",       "package": "",          "cask": "visual-studio-code" },
     { "name": "ghostty",    "package": "ghostty",   "cask": "" },
-    { "name": "omp",        "package": "jandedobbeleer/oh-my-posh/oh-my-posh", "cask": "" }
+    { "name": "copilot",    "package": "github-copilot-cli", "cask": "" }
   ]
 }

@@ -1,5 +1,9 @@
 # Copilot Instructions
 
+## Build / Test / Lint
+
+None — this is a configuration repository with install scripts, not a compiled project.
+
 ## Repository Overview
 
 This is a cross-platform dotfiles repository that configures development environments on Windows, macOS, and Linux. It uses a platform-specific + shared architecture with automated installation scripts.
@@ -28,11 +32,11 @@ This is a cross-platform dotfiles repository that configures development environ
 - `windows/` — PowerShell scripts, DSC configs, Windows Terminal settings
 - `mac/` — Homebrew-based install, Zsh config
 - `linux/` — Apt-based install, Bash config
-- `shared/` — Cross-platform configs: Neovim, VS Code, Oh My Posh, npm packages
+- `shared/` — Cross-platform configs: Neovim, VS Code, npm packages
 
 ### Installation Flow
 
-**Windows** (`install.ps1`): Calls modular scripts in `windows/powershell/scripts/` sequentially — ConfigurePowershell → InstallPackages → ConfigureNVim → ConfigureVSCode → ConfigureWindows → ConfigureGit → ConfigurePosh.
+**Windows** (`install.ps1`): Calls modular scripts in `windows/powershell/scripts/` sequentially — ConfigurePowershell → InstallPackages → ConfigureNVim → ConfigureVSCode → ConfigureWindows → ConfigureGit.
 
 **macOS** (`mac/install.sh`): Bootstraps Homebrew, installs packages from `mac/packages.json` (split by `package` vs `cask` fields), then copies shared configs to `~/.config/`.
 
@@ -67,11 +71,7 @@ All Neovim Lua modules live under `shared/nvim/lua/miliddle/`. The plugin manage
 
 ### Font Standardization
 
-JetBrains Mono Nerd Font is used everywhere — Windows Terminal, VS Code, Oh My Posh prompt. Install scripts handle font setup per platform.
-
-### Oh My Posh Prompt Config
-
-`shared/config/miliddle.omp.json` defines a 2-line powerline prompt with git status indicators. It's referenced by both the Zsh and PowerShell profiles.
+JetBrains Mono Nerd Font is used in Windows Terminal and VS Code.
 
 ### Git Configuration
 
@@ -82,6 +82,14 @@ JetBrains Mono Nerd Font is used everywhere — Windows Terminal, VS Code, Oh My
 ### Scripts Are Idempotent
 
 Install scripts check for existing installations before acting (e.g., `brew list` checks, `cmp -s` file comparison on Linux, Winget DSC desired state). They're safe to re-run.
+
+### The `open` Alias Detects Devcontainers
+
+The PowerShell `open` alias (mapped to `Invoke-OpenDevProject`) checks for a `.devcontainer` directory in the target folder. If found, it opens the project in a VS Code devcontainer instead of a normal window.
+
+### PowerShell Profile Auto-Syncs Dotfiles
+
+The PowerShell profile runs a background job on load that pulls the dotfiles repo and copies the profile to OneDrive. Be careful not to break the `Start-Job` block at the end of `windows/powershell/profile.ps1`.
 
 ### VS Code Formatter Assignments
 

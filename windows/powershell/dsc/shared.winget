@@ -89,14 +89,6 @@ properties:
         Source: winget
 
     - resource: Microsoft.Winget.DSC/WinGetPackage
-      id: installOhMyPosh
-      directives:
-        description: Install Oh My Posh
-      settings:
-        Id: JanDeDobbeleer.OhMyPosh
-        Source: winget
-
-    - resource: Microsoft.Winget.DSC/WinGetPackage
       id: installDebian
       directives:
         description: Install Debian
