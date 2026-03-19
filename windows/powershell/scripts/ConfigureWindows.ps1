@@ -156,3 +156,7 @@ else {
     Write-Host "WSL is already enabled."
 }
 
+# Copy Windows Terminal settings
+Copy-Item -Force windows/config/wt.json "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Write-Output "Windows Terminal settings updated."
+
