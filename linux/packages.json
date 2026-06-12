@@ -1,5 +1,6 @@
 {
   "personal": [
+    { "name": "bash-completion", "package": "bash-completion" },
     { "name": "git", "package": "git" },
     { "name": "tmux", "package": "tmux" },
     { "name": "curl", "package": "curl" },

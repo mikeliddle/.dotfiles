@@ -37,4 +37,3 @@ if ($vscode) {
 
 & "$ScriptDirectory\windows\powershell\scripts\ConfigureWindows.ps1"
 & "$ScriptDirectory\windows\powershell\scripts\ConfigureGit.ps1"
-& "$ScriptDirectory\windows\powershell\scripts\ConfigurePosh.ps1"

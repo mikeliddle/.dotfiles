@@ -12,4 +12,14 @@ export LANG=en_US.UTF-8
 
 source ~/.zsh/aliases
 
-eval "$(oh-my-posh init zsh --config ~/.config/miliddle.omp.json)"
+if [[ -s "$ZSH/oh-my-zsh.sh" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+    PROMPT=${PROMPT//\%~/%1~}
+    PROMPT=${PROMPT/% / > }
+    RPROMPT=''
+else
+    autoload -Uz compinit
+    compinit
+    PROMPT='%1~ > '
+    RPROMPT=''
+fi
