@@ -23,8 +23,8 @@ Run the appropriate installation script based on your operating system:
 
 ## Options
 
-* `-p` - Only run the package install steps
-* `-n` - Only copy over the neovim config
+- `-p` - Only run the package install steps
+- `-n` - Only copy over the neovim config
 
 `.env` - create this file with the git config information applied in `ConfigureGit.ps1`
 
@@ -36,6 +36,23 @@ For an example, see `env`
 - Pre-configured Neovim setup.
 - Recommended VS Code extensions.
 - PowerShell and Zsh profiles for enhanced productivity.
+- macOS Zsh setup bootstraps Oh My Zsh and enables Git-aware shell completion.
+- macOS Hammerspoon window-slot macros for fast window recall.
+
+## macOS Hammerspoon window slots
+
+On macOS, the installer now sets up `Hammerspoon` and copies `mac/hammerspoon/init.lua` to `~/.hammerspoon/init.lua`.
+
+Default shortcuts:
+
+- `Alt` + `Shift` + `1..9` focuses the saved window in that slot, launching the saved app first if needed.
+- `Alt` + `Shift` + `0` shows an overview of all saved slots.
+- `Cmd` + `Alt` + `Shift` + `1..9` saves the currently focused window into that slot.
+- `Alt` + `Shift` + `Left` snaps the frontmost window to the left half.
+- `Alt` + `Shift` + `Right` snaps the frontmost window to the right half.
+- `Alt` + `Shift` + `Up` maximizes the frontmost window.
+
+The first time you launch Hammerspoon, macOS will prompt for Accessibility permissions so it can inspect and focus windows.
 
 ## Troubleshooting
 

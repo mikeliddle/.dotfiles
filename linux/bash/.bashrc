@@ -13,6 +13,15 @@ elif [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
+if ! declare -F _git &> /dev/null; then
+    for git_completion in /usr/share/bash-completion/completions/git /usr/share/git/completion/git-completion.bash; do
+        if [ -f "$git_completion" ]; then
+            . "$git_completion"
+            break
+        fi
+    done
+fi
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

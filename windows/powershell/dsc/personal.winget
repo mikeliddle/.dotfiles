@@ -1,14 +1,6 @@
 properties:
   resources:
     - resource: Microsoft.Winget.DSC/WinGetPackage
-      id: installNextcloud
-      directives:
-        description: Install Nextcloud
-      settings:
-        Id: Nextcloud.NextcloudDesktop
-        Source: winget
-
-    - resource: Microsoft.Winget.DSC/WinGetPackage
       id: installSteam
       directives:
         description: Install Steam
