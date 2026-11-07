@@ -54,6 +54,18 @@ Default shortcuts:
 
 The first time you launch Hammerspoon, macOS will prompt for Accessibility permissions so it can inspect and focus windows.
 
+## Windows AutoHotkey startup
+
+If `~\AutoHotkey\WindowSlots.ahk` exists, the Windows installer configures its scheduled task to start at login and workstation unlock. AutoHotkey v2 must already be installed.
+
+To configure only AutoHotkey, run this in an elevated PowerShell session:
+
+```powershell
+.\windows\powershell\scripts\ConfigureAutoHotkey.ps1
+```
+
+The script accepts `-ScriptPath` and `-AutoHotkeyPath` for non-default locations. It runs AutoHotkey elevated, without a UAC prompt at login or unlock, and ignores additional triggers while the task is running. Exiting AutoHotkey leaves it stopped until the next login or unlock; there is no periodic watchdog.
+
 ## Troubleshooting
 
 - Ensure you have the required permissions to execute the scripts.

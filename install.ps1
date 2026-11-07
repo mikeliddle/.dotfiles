@@ -35,5 +35,9 @@ if ($vscode) {
 & "$ScriptDirectory\windows\powershell\scripts\ConfigureNVim.ps1"
 & "$ScriptDirectory\windows\powershell\scripts\ConfigureVSCode.ps1"
 
+if (Test-Path -LiteralPath "$env:USERPROFILE\AutoHotkey\WindowSlots.ahk") {
+    & "$ScriptDirectory\windows\powershell\scripts\ConfigureAutoHotkey.ps1"
+}
+
 & "$ScriptDirectory\windows\powershell\scripts\ConfigureWindows.ps1"
 & "$ScriptDirectory\windows\powershell\scripts\ConfigureGit.ps1"
